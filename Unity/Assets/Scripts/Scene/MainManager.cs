@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainSceneManager : MonoBehaviour
+public class MainManager : MonoBehaviour
 {
 
     private void Start()
