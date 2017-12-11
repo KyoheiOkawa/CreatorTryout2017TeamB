@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThisManager : MonoBehaviour
+public class TitleManager : MonoBehaviour
 {
 
 	private void Start()
