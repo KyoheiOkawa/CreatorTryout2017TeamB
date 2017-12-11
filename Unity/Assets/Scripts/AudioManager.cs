@@ -28,7 +28,7 @@ public class SoundVolume
 ///　プ：東　Audio管理クラス
 /// </summary>
 /// <remarks>
-/// SingletonMonoBehavorを継承
+/// SingletonMonoBehaviourを継承
 /// </remarks>
 public class AudioManager : SingletonMonoBehaviour<AudioManager>
 {

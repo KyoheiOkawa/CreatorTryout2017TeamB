@@ -7,16 +7,10 @@ using UnityEngine.SceneManagement;
 /// プ：東　ゲーム全体のシーン管理クラス
 /// </summary>
 /// <remarks>
-/// SingletonMonoBehaviorクラス継承
+/// SingletonMonoBehaviourクラス継承
 /// </remarks>
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
-    private const int TITLE  = 0;
-    private const int MAIN   = 1;
-    private const int RESULT = 2;
-
-    public int nowScene = 0;
-
 	private void Awake()
 	{
 		//SceneManagerを登録
@@ -34,16 +28,19 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void TitleSceneLoad()
     {
+        Debug.Log("Next Scene Title");
         SceneManager.LoadScene("Title");
     }
 
     public void MainSceneLoad()
     {
+        Debug.Log("Next Scene Main");
         SceneManager.LoadScene("MainStage");
     }
 
     public void ResultSceneLoad()
     {
+        Debug.Log("Next Scene Result");
         SceneManager.LoadScene("Result");
     }
 }

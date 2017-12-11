@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Singletonクラス
-/// </summary>
-/// <remarks>
-/// 他のManagerクラスで継承
-/// 参考:http://qiita.com/okuhiiro/items/3d69c602b8538c04a479
-/// </remarks>
+/// プ：東　Singleton基底クラス
+/// <summary>
 public class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
 {
 	private static T instance;
