@@ -26,21 +26,26 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 		Application.targetFrameRate = 60;
 	}
 
-    public void TitleSceneLoad()
+    public void LoadScene(string sceneName)
     {
-        Debug.Log("Next Scene Title");
-        SceneManager.LoadScene("Title");
+        StartCoroutine(LoadSceneCouroutine(sceneName));
     }
 
-    public void MainSceneLoad()
+    private IEnumerator LoadSceneCouroutine(string nextScene)
     {
-        Debug.Log("Next Scene Main");
-        SceneManager.LoadScene("MainStage");
-    }
+        AsyncOperation async = SceneManager.LoadSceneAsync(nextScene);
+        async.allowSceneActivation = false;    // シーン遷移をしない
 
-    public void ResultSceneLoad()
-    {
-        Debug.Log("Next Scene Result");
-        SceneManager.LoadScene("Result");
+        Debug.Log("Next Scene " + nextScene);
+
+        while (async.progress < 0.9f)
+        {
+            Debug.Log(async.progress);
+            yield return new WaitForEndOfFrame();
+        }
+
+        yield return new WaitForSeconds(1);
+
+        async.allowSceneActivation = true;    // シーン遷移許可
     }
 }

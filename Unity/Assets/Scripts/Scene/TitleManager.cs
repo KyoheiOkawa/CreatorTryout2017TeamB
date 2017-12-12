@@ -16,16 +16,18 @@ public class TitleManager : MonoBehaviour
 
 	private void Update()
 	{
-		SceneUpdate();
-	}
+        SceneUpdate();
+    }
 
 	private void SceneUpdate()
 	{
-	}
+        if (Input.GetMouseButtonDown(0))
+            SceneNext();
+    }
 
     private void SceneNext()
     {
-        game.MainSceneLoad();
+        game.LoadScene("Result");
     }
 
     private void GameEnd()
