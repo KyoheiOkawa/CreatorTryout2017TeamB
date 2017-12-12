@@ -51,7 +51,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
         while (async.progress < 0.9f)
         {
-            Debug.Log(async.progress);
+            //Debug.Log(async.progress);
             yield return new WaitForEndOfFrame();
         }
 

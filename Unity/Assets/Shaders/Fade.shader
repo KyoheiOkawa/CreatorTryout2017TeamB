@@ -86,7 +86,7 @@ Shader "UI/Fade"
 //				return tex;
 				fixed4 mask = tex2D(_MaskTex,IN.texcoord);
 				fixed4 result = _Color;
-				result.a = 1.0f - (mask.r + (1 - _Fade * 2));
+				result.a = 1.0f - (mask.r - (-1 + _Fade * 2));
 				return result;
 			}
 		ENDCG

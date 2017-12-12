@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Material: {fileID: 2100000, guid: 32c85b4b39ba147dc91473bf4d8c018d, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
-  fadeRange: 0
+  fadeRange: 0.029
   maskTexture: {fileID: 2800000, guid: 6cb5a45de0bbc40e4a92752224c6a105, type: 3}
   fadeTexture: {fileID: 0}
 --- !u!114 &114685466412283916
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1045342810148084}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -109,7 +109,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 999
+  m_SortingOrder: 99
   m_TargetDisplay: 0
 --- !u!224 &224527729882685316
 RectTransform:

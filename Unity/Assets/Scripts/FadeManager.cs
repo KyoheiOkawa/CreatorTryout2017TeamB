@@ -28,7 +28,7 @@ public class FadeManager : Graphic
 
 				if (instance == null)
 				{
-					GameObject obj = Instantiate(Resources.Load("Prefabs/FadeCanvas") as GameObject);
+					GameObject obj = Instantiate(Resources.Load("FadeCanvas") as GameObject);
 					instance = obj.GetComponent<FadeManager>();
 				}
 			}
