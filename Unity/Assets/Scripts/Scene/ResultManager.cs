@@ -7,7 +7,6 @@ using UnityEngine;
 /// </summary>
 public class ResultManager : MonoBehaviour
 {
-
     private GameManager game;
 
     private void Start()
@@ -22,6 +21,8 @@ public class ResultManager : MonoBehaviour
 
     private void SceneUpdate()
     {
+        if (Input.GetMouseButtonDown(0))
+            SceneBack();
     }
 
     private void SceneInit()
@@ -30,6 +31,6 @@ public class ResultManager : MonoBehaviour
 
     private void SceneBack()
     {
-        game.TitleSceneLoad();
+        game.LoadScene("Title");
     }
 }

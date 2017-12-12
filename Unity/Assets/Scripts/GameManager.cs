@@ -26,18 +26,23 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 		Application.targetFrameRate = 60;
 	}
 
-    IEnumerator LoadScene(string nextScene)
+    public void LoadScene(string sceneName)
+    {
+        StartCoroutine(LoadSceneCouroutine(sceneName));
+    }
+
+    private IEnumerator LoadSceneCouroutine(string nextScene)
     {
         AsyncOperation async = SceneManager.LoadSceneAsync(nextScene);
         async.allowSceneActivation = false;    // シーン遷移をしない
+
+        Debug.Log("Next Scene " + nextScene);
 
         while (async.progress < 0.9f)
         {
             Debug.Log(async.progress);
             yield return new WaitForEndOfFrame();
         }
-
-        Debug.Log("Scene Loaded");
 
         yield return new WaitForSeconds(1);
 
