@@ -9,6 +9,8 @@ public class TitleManager : MonoBehaviour
 {
     private GameManager game;
 
+	bool isChanged = false;
+
 	private void Start()
 	{
         game = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -21,13 +23,16 @@ public class TitleManager : MonoBehaviour
 
 	private void SceneUpdate()
 	{
-        if (Input.GetMouseButtonDown(0))
-            SceneNext();
+		if (Input.GetMouseButtonDown (0) && !isChanged)
+		{
+			SceneNext ();
+			isChanged = true;
+		}
     }
 
     private void SceneNext()
     {
-        game.LoadScene("Result");
+		FadeManager.Instance.Transition (0.5f, "Result");
     }
 
     private void GameEnd()
