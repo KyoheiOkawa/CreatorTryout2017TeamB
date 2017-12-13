@@ -12,7 +12,7 @@ using UnityEngine;
 public class SoundVolume
 {
 	public float bgm = 1.0f;
-	public float se = 1.0f;
+	public float se = 0.3f;
 
 	public bool mute = false;
 
