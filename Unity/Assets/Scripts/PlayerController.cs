@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour {
 		// デバイスの傾きを反映
 		transform.rotation = new Quaternion(0,0,deviceRotation.z,deviceRotation.w);
 
-		Debug.Log (transform.rotation);
+		//Debug.Log (transform.rotation);
 
 		//Debug.Log ((0.5f - deviceRotation.z));
 

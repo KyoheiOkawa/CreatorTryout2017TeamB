@@ -14,6 +14,11 @@ public class CameraScript : MonoBehaviour {
 
 	void Update () 
 	{
-		transform.position = player.transform.position - new Vector3 (-4, 2, 10);
+		transform.position = player.transform.position - new Vector3 (-4, 0, 10);
+	}
+
+	public void SetTargetObject(GameObject target)
+	{
+		player = target;
 	}
 }
