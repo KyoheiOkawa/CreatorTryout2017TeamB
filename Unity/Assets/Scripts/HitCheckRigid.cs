@@ -10,19 +10,24 @@ public class HitCheckRigid : MonoBehaviour
 	[SerializeField]
 	MainManager mainManager;
 
-	[SerializeField]
-	float successAngle = 30.0f;
+	Rigidbody rigid;
 
 	void Start()
 	{
 		if (mainManager == null)
 			mainManager = GameObject.Find ("MainManager").GetComponent<MainManager> ();
+
+		rigid = GetComponent<Rigidbody> ();
+		capusule = GetComponent<CapsuleCollider> ();
 	}
 
 	void Update()
 	{
 		if(mainManager == null)
 			mainManager = GameObject.Find ("MainManager").GetComponent<MainManager> ();
+
+		if (rigid.velocity.magnitude < 0.1f)
+			mainManager.ClearGame ();
 
 
 		Vector3 start = transform.position + capusule.center + transform.up * (capusule.height / 2.0f);

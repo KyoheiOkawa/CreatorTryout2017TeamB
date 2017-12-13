@@ -41,12 +41,10 @@ public class PlayerHitCheck : MonoBehaviour
 
 				if (angle <= successAngle) 
 				{
-					mainManager.ClearGame ();
-
 					var rigidAirplane = Instantiate (Resources.Load ("AirplaneRigid"),transform.position,transform.rotation) as GameObject;
 					Camera.main.GetComponent<CameraScript> ().SetTargetObject (rigidAirplane.gameObject);
 
-					rigidAirplane.GetComponent<Rigidbody> ().velocity = transform.up * 20;
+					rigidAirplane.GetComponent<Rigidbody> ().velocity = transform.up * 10;
 				} 
 				else 
 				{

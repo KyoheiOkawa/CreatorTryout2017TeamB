@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 95854481992757586}
   - component: {fileID: 136104238555015234}
   - component: {fileID: 54924677529808166}
+  - component: {fileID: 114616139871193866}
   m_Layer: 0
   m_Name: AirplaneRigid
   m_TagString: Player
@@ -117,6 +118,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114616139871193866
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1139532750202164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b053e15b59e914189b87751797bd1e0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  capusule: {fileID: 136104238555015234}
+  mainManager: {fileID: 0}
 --- !u!136 &136104238555015234
 CapsuleCollider:
   m_ObjectHideFlags: 1
