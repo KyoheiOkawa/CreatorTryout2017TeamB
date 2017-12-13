@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33143516606710092}
   - component: {fileID: 23744206383969006}
   - component: {fileID: 95406289553827930}
-  - component: {fileID: 114499974921336868}
+  - component: {fileID: 114774456041205498}
   m_Layer: 0
   m_Name: Airplane_Enemy
   m_TagString: Untagged
@@ -101,7 +101,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114499974921336868
+--- !u!114 &114774456041205498
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -115,9 +115,9 @@ MonoBehaviour:
   Player: {fileID: 0}
   ResetDistance: 5
   MinSpeed: 0.1
-  MaxSpeed: 0.5
-  ResetMinTime: 3
-  ResetMaxTime: 5
+  MaxSpeed: 0.25
+  ResetMinTime: 0
+  ResetMaxTime: 1
   MinHeight: -6
   MaxHeight: 0
   Cnt: 0

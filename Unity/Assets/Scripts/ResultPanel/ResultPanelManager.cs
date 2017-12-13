@@ -27,22 +27,26 @@ public class ResultPanelManager : MonoBehaviour
 
 	void ShowPanel(string panelName)
 	{
+		if (GameObject.FindObjectOfType<ResultPanel> ())
+			return;
+
 		var canvas = GameObject.Find ("Canvas");
 
 		GameObject panel = Instantiate (Resources.Load (panelName) as GameObject);
 		panel.transform.parent = canvas.transform;
 		panel.GetComponent<RectTransform>().localPosition = new Vector3 (0, 0, 0);
+		panel.GetComponent<RectTransform> ().localScale = new Vector3 (1, 1, 1);
 	}
 
 	public void ShowClearPanel()
 	{
 		ShowPanel ("ClearPanel");
-        GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayBGM("gameclear", 0.1f, true);
+        GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayBGM("gameclear", 0.5f, true);
 	}
 
 	public void ShowFailedPanel()
 	{
 		ShowPanel ("FailedPanel");
-        GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayBGM("gameover", 0.1f, true);
+        GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayBGM("gameover", 1.0f, true);
     }
 }

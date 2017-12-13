@@ -8,16 +8,17 @@ using UnityEngine;
 public class TitleManager : MonoBehaviour
 {
     private GameManager     game;
-    private AudioManager    audio;
+    private AudioManager    sound;
 
 	bool isChanged = false;
+    bool isFade = false;
 
 	private void Start()
 	{
         game = GameObject.Find("GameManager").GetComponent<GameManager>();
-        audio = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        sound = GameObject.Find("AudioManager").GetComponent<AudioManager>();
 
-        audio.PlayBGM("title",0.1f,true);
+        sound.PlayBGM("title",0.6f,true);
 	}
 
 	private void Update()
@@ -32,13 +33,20 @@ public class TitleManager : MonoBehaviour
 			SceneNext ();
 			isChanged = true;
 
-            GameObject.Find("AudioManager").GetComponent<AudioManager>().PlaySE("enter",0.1f);
+            sound.PlaySE("fade",0.3f);
+            sound.PlaySE("enter",0.1f);
+        }
+
+        if (isFade)
+        {
+            sound.VolumeDownBGM(0.00065f);
         }
     }
 
     private void SceneNext()
     {
-		FadeManager.Instance.Transition (0.5f, "Result");
+		    FadeManager.Instance.Transition (3.0f, "Main");
+        isFade = true;
     }
 
     private void GameEnd()
