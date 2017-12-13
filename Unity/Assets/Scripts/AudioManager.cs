@@ -39,7 +39,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
 
 	public AudioSource bgmSource;
 
-	private const int SE_MAX = 8;
+    private const int SE_MAX = 8;
 	public AudioSource[] seSources = new AudioSource[SE_MAX];
 
 	private Dictionary<string, int> bgmDictionary = new Dictionary<string, int>();
@@ -142,6 +142,14 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
 		bgmSource.loop = loop;
 		bgmSource.Play();
 	}
+
+    public void VolumeDownBGM(float volume)
+    {
+        if (bgmSource.volume > 0)
+        {
+            bgmSource.volume -= volume;
+        }
+    }
 
     /// <summary>
     ///　SEの再生をファイル名で指定
