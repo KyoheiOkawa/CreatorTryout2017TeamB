@@ -11,6 +11,16 @@ using UnityEngine.SceneManagement;
 /// </remarks>
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
+	bool isLoadingNextScene = false;
+
+	public bool IsLoadingNextScene 
+	{
+		get 
+		{
+			return isLoadingNextScene;
+		}
+	}
+
 	private void Awake()
 	{
 		//SceneManagerを登録
@@ -29,6 +39,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public void LoadScene(string sceneName)
     {
         StartCoroutine(LoadSceneCouroutine(sceneName));
+		isLoadingNextScene = true;
     }
 
     private IEnumerator LoadSceneCouroutine(string nextScene)
@@ -40,12 +51,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
         while (async.progress < 0.9f)
         {
-            Debug.Log(async.progress);
+            //Debug.Log(async.progress);
             yield return new WaitForEndOfFrame();
         }
 
         yield return new WaitForSeconds(1);
 
         async.allowSceneActivation = true;    // シーン遷移許可
+		isLoadingNextScene = false;
     }
 }
