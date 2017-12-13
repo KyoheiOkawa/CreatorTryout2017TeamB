@@ -2,38 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemyAI : MonoBehaviour
+public class EnemyAI : MonoBehaviour
 {
-    public GameObject player;
+    public GameObject Player;
 
     // プレイヤーからどのくらい離れたら位置のリセットを行うか
-    public float Resetdistance = 5.0f;
+    public float ResetDistance = 5.0f;
 
     // プレイヤーからどのくらい先に場所の設定をするか
-    private float Posx = 15.0f;
+    private float PosX = 15.0f;
 
-    private Vector3 Speed = new Vector3(0.1f, 0.0f, 0.0f);
+    private Vector3 Speed ;
 
     // 最低速度
     public float MinSpeed = 0.1f;
 
     // 最大速度
-    public float MaxSpeed = 0.1f;
+    public float MaxSpeed = 0.5f;
 
     // 最低何秒後にリセットするか
-    public float ResetMinTime = 5;
+    public float ResetMinTime = 3;
 
     // 最大何秒後にリセットするか
     public float ResetMaxTime = 5;
 
     // 最低の高さ
-    public float MinHeight = -5.0f;
+    public float MinHeight = -6.0f;
 
     // 最高の高さ
-    public float MaxHeight = 5.0f;
+    public float MaxHeight = 0.0f;
 
     // カウント用変数
-    private float time;
+    public float Cnt;
 
     // 移動フラグ
     private bool IsMove;
@@ -41,11 +41,11 @@ public class enemyAI : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        this.transform.position = new Vector3(Posx, Random.Range(MinHeight, MaxHeight), 0.0f) + player.transform.position;
+        this.transform.position = new Vector3(PosX, Random.Range(MinHeight, MaxHeight), 0.0f) + Player.transform.position;
 
         Speed = new Vector3(Random.Range(MinSpeed, MaxSpeed), 0.0f, 0.0f);
 
-        time = Random.Range(ResetMinTime, ResetMaxTime);
+        Cnt = Random.Range(ResetMinTime, ResetMaxTime);
 
         IsMove = true;
     }
@@ -58,11 +58,13 @@ public class enemyAI : MonoBehaviour
         else
         {
             //1秒に1ずつ減らしていく
-            time -= Time.deltaTime;
+            Cnt -= Time.deltaTime;
 
-            if (time < 0)
+            if (Cnt < 0)
             {
                 IsMove = true;
+
+                this.transform.position = new Vector3(PosX, Random.Range(MinHeight, MaxHeight), 0.0f) + Player.transform.position;
             }
         }
     }
@@ -78,18 +80,18 @@ public class enemyAI : MonoBehaviour
     void NewValueSet()
     {
         // プレイヤーがnullの場合は返す
-        if (player == null) return;
+        if (Player == null) return;
 
         // プレイヤーより手前に自分がいたら返す
-        if (this.transform.position.x > player.transform.position.x) return;
+        if (this.transform.position.x > Player.transform.position.x + ResetDistance) return;
 
-        // -5.0 ～ 5.0内のランダム数を高さに設定する
-        // Random.Range(-5.0f, 5.0f), 0.0f)
-        this.transform.position = new Vector3(Posx, Random.Range(MinHeight, MaxHeight), 0.0f) + player.transform.position;
+        // MinHeight ～ MaxHeight内のランダム数を高さに設定する
+        // Random.Range(MinHeight, MaxHeight), 0.0f)
+        //this.transform.position = new Vector3(PosX, Random.Range(MinHeight, MaxHeight), 0.0f) + Player.transform.position;
 
         Speed = new Vector3(Random.Range(MinSpeed, MaxSpeed), 0.0f, 0.0f);
 
-        time = Random.Range(ResetMinTime, ResetMaxTime);
+        Cnt = Random.Range(ResetMinTime, ResetMaxTime);
 
         IsMove = false;
     }
