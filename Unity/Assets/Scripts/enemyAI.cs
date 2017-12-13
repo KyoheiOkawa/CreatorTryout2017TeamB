@@ -10,7 +10,7 @@ public class EnemyAI : MonoBehaviour
     public float ResetDistance = 6.0f;
 
     // プレイヤーからどのくらい先に場所の設定をするか
-    private float PosX = 15.0f;
+    private float PosX = 20.0f;
 
     private Vector3 Speed ;
 
@@ -33,22 +33,24 @@ public class EnemyAI : MonoBehaviour
     public float MaxHeight = -3.0f;
 
     // カウント用変数
-    [SerializeField]
     private float Cnt;
 
     // 移動フラグ
     private bool IsMove = false;
 
     // スタート秒数
-    public float StartTime = 3;
+    public float StartTime = 6;
 
     // スタートフラグ
     private bool StartFlag = false;
 
+    // 地面から高さ
+    public float GrandHeight = 15.0f;
+
     // Use this for initialization
     void Start()
     {
-        this.transform.position = new Vector3(-100.0f,0.0f, 0.0f);
+        this.transform.position = new Vector3(0.0f,-10.0f, 0.0f);
 
         Speed = new Vector3(Random.Range(MinSpeed, MaxSpeed), 0.0f, 0.0f);
 
@@ -66,12 +68,14 @@ public class EnemyAI : MonoBehaviour
             }
             else if (StartTime <= 0)
             {
+                if (this != null || PlayerController.Instance.Feed > GrandHeight)
+                {
+                    IsMove = true;
 
-                IsMove = true;
+                    this.transform.position = new Vector3(PosX, Random.Range(MinHeight, MaxHeight), 0.0f) + PlayerController.Instance.transform.position;
 
-                this.transform.position = new Vector3(PosX, Random.Range(MinHeight, MaxHeight), 0.0f) + PlayerController.Instance.transform.position;
-
-                StartFlag = true;
+                    StartFlag = true;
+                }
             }
         }
         else
@@ -120,7 +124,7 @@ public class EnemyAI : MonoBehaviour
 
     void OnBecameInvisible()
     {
-        if (this != null || PlayerController.Instance.Feed > 15.0f )
+        if (this != null || PlayerController.Instance.Feed > GrandHeight)
             NewValueSet();
     }
 }
