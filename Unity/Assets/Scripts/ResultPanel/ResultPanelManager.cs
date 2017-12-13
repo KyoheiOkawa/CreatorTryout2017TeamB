@@ -32,6 +32,7 @@ public class ResultPanelManager : MonoBehaviour
 		GameObject panel = Instantiate (Resources.Load (panelName) as GameObject);
 		panel.transform.parent = canvas.transform;
 		panel.GetComponent<RectTransform>().localPosition = new Vector3 (0, 0, 0);
+		panel.GetComponent<RectTransform> ().localScale = new Vector3 (1, 1, 1);
 	}
 
 	public void ShowClearPanel()
