@@ -26,6 +26,9 @@ public class HitCheckRigid : MonoBehaviour
 		if(mainManager == null)
 			mainManager = GameObject.Find ("MainManager").GetComponent<MainManager> ();
 
+		if (mainManager.NowState != MainManager.State.Playing)
+			return;
+
 		if (rigid.velocity.magnitude < 0.1f)
 			mainManager.ClearGame ();
 
