@@ -85,7 +85,7 @@ public class EnemyBalloon : MonoBehaviour {
             moveSpeed = Random.Range(minSpeed, maxSpeed);
 
             // 再配置の座標
-            this.transform.position = new Vector3(rangeBalloon, PlayerController.Instance.transform.position.y -15, 5);
+            this.transform.position = new Vector3(rangeBalloon, PlayerController.Instance.transform.position.y -15, 0);
         }
         else
         { // 何もなし
