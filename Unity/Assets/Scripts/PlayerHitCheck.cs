@@ -61,6 +61,7 @@ public class PlayerHitCheck : MonoBehaviour
                 }
                 else
                 {
+					AudioManager.Instance.PlaySE ("bomb", 0.5f);
                     mainManager.FailedGame(transform.position);
                     gameObject.SetActive(false);
                 }
@@ -68,12 +69,14 @@ public class PlayerHitCheck : MonoBehaviour
 
             if (col.gameObject.CompareTag("CrazyZone"))
             {
+				AudioManager.Instance.PlaySE ("bomb", 0.5f);
                 mainManager.FailedGame(transform.position);
                 gameObject.SetActive(false);
             }
 
             if (col.gameObject.CompareTag("Enemy"))
             {
+				AudioManager.Instance.PlaySE ("bomb", 0.5f);
                 mainManager.FailedGame(transform.position);
                 gameObject.SetActive(false);
             }
@@ -91,6 +94,7 @@ public class PlayerHitCheck : MonoBehaviour
         {
             if (col.gameObject.CompareTag("CrazyZone"))
             {
+				AudioManager.Instance.PlaySE ("bomb", 0.5f);
                 mainManager.FailedGame(transform.position);
                 gameObject.SetActive(false);
             }

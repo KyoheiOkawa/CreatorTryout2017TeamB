@@ -152,7 +152,7 @@ public class FadeManager : Graphic
 	/// シーン上のCanvasGroupのraycastBlockの値をセットする
 	/// </summary>
 	/// <param name="b">If set to <c>true</c> b.キャンバス上のボタンなどが反応する</param>
-	void SetRayCastBlock(bool b)
+	public void SetRayCastBlock(bool b)
 	{
 		CanvasGroup[] group = GameObject.FindObjectsOfType<CanvasGroup>() as CanvasGroup[];
 		foreach (CanvasGroup obj in group)

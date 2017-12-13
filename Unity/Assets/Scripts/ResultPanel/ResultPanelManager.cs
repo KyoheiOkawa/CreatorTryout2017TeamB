@@ -38,12 +38,12 @@ public class ResultPanelManager : MonoBehaviour
 	public void ShowClearPanel()
 	{
 		ShowPanel ("ClearPanel");
-        GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayBGM("gameclear", 0.1f, true);
+        GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayBGM("gameclear", 0.5f, true);
 	}
 
 	public void ShowFailedPanel()
 	{
 		ShowPanel ("FailedPanel");
-        GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayBGM("gameover", 0.1f, true);
+        GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayBGM("gameover", 1.0f, true);
     }
 }

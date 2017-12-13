@@ -27,6 +27,11 @@ public class MainManager : MonoBehaviour
 	[SerializeField]
 	GameObject failedEffect2;
 
+	void Start()
+	{
+		AudioManager.Instance.PlayBGM ("main", 0.5f, true);
+	}
+
     public void Ground()
     {
         state = State.Grounded;

@@ -18,7 +18,7 @@ public class TitleManager : MonoBehaviour
         game = GameObject.Find("GameManager").GetComponent<GameManager>();
         sound = GameObject.Find("AudioManager").GetComponent<AudioManager>();
 
-        sound.PlayBGM("title",0.1f,true);
+        sound.PlayBGM("title",0.6f,true);
 	}
 
 	private void Update()
@@ -33,7 +33,7 @@ public class TitleManager : MonoBehaviour
 			SceneNext ();
 			isChanged = true;
 
-            sound.PlaySE("fade",0.1f);
+            sound.PlaySE("fade",0.3f);
             sound.PlaySE("enter",0.1f);
         }
 
