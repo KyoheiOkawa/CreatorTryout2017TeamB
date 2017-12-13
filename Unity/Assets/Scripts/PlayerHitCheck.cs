@@ -14,57 +14,86 @@ public class PlayerHitCheck : MonoBehaviour
 	[SerializeField]
 	float successAngle = 30.0f;
 
+    private Rigidbody rigid;
+
 	void Start()
 	{
 		if (mainManager == null)
 			mainManager = GameObject.Find ("MainManager").GetComponent<MainManager> ();
+
+        rigid = GetComponent<Rigidbody>();
 	}
 
-	void Update()
-	{
-		if(mainManager == null)
-			mainManager = GameObject.Find ("MainManager").GetComponent<MainManager> ();
+    void Update()
+    {
+        if (mainManager == null)
+            mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
 
-		if (mainManager.NowState != MainManager.State.Playing)
-			return;
+        if (mainManager.NowState == MainManager.State.Grounded)
+        {
+            HitCheckCrazyZoneAfterGrouded();
 
-		Vector3 start = transform.position + capusule.center + transform.up * (capusule.height / 2.0f);
-		Vector3 end = transform.position + capusule.center + transform.up * -(capusule.height / 2.0f);
+            if (rigid.velocity.magnitude < 0.1f)
+                mainManager.ClearGame();
+        }
 
-		var cols = Physics.OverlapCapsule (start, end, capusule.radius);
+        if (mainManager.NowState != MainManager.State.Playing)
+            return;
 
-		foreach (var col in cols) 
-		{
-			if (col.gameObject.CompareTag ("Ground"))
-			{
-				float angle = Vector3.Angle (transform.up, Vector3.right);
+        Vector3 start = transform.position + capusule.center + transform.up * (capusule.height / 2.0f);
+        Vector3 end = transform.position + capusule.center + transform.up * -(capusule.height / 2.0f);
 
-				if (angle <= successAngle) 
-				{
-					var rigidAirplane = Instantiate (Resources.Load ("AirplaneRigid"),transform.position,transform.rotation) as GameObject;
-					Camera.main.GetComponent<CameraScript> ().SetTargetObject (rigidAirplane.gameObject);
+        var cols = Physics.OverlapCapsule(start, end, capusule.radius);
 
-					rigidAirplane.GetComponent<Rigidbody> ().velocity = transform.up * 10;
-				} 
-				else 
-				{
-					mainManager.FailedGame (transform.position);
-				}
+        foreach (var col in cols)
+        {
+            if (col.gameObject.CompareTag("Ground"))
+            {
+                float angle = Vector3.Angle(transform.up, Vector3.right);
 
-				gameObject.SetActive (false);
-			}
+                if (angle <= successAngle)
+                {
+                    PlayerController.Instance.isMove = false;
+                    mainManager.Ground();
 
-			if (col.gameObject.CompareTag ("CrazyZone"))
-			{
-				mainManager.FailedGame (transform.position);
-				gameObject.SetActive (false);
-			}
+                    rigid.useGravity = true;
+                    rigid.velocity = transform.up * 15;
+                }
+                else
+                {
+                    mainManager.FailedGame(transform.position);
+                    gameObject.SetActive(false);
+                }
+            }
 
-			if (col.gameObject.CompareTag ("Enemy")) 
-			{
-				mainManager.FailedGame (transform.position);
-				gameObject.SetActive (false);
-			}
-		}
-	}
+            if (col.gameObject.CompareTag("CrazyZone"))
+            {
+                mainManager.FailedGame(transform.position);
+                gameObject.SetActive(false);
+            }
+
+            if (col.gameObject.CompareTag("Enemy"))
+            {
+                mainManager.FailedGame(transform.position);
+                gameObject.SetActive(false);
+            }
+        }
+    }
+
+    void HitCheckCrazyZoneAfterGrouded()
+    {
+        Vector3 start = transform.position + capusule.center + transform.up * (capusule.height / 2.0f);
+        Vector3 end = transform.position + capusule.center + transform.up * -(capusule.height / 2.0f);
+
+        var cols = Physics.OverlapCapsule(start, end, capusule.radius);
+
+        foreach (var col in cols)
+        {
+            if (col.gameObject.CompareTag("CrazyZone"))
+            {
+                mainManager.FailedGame(transform.position);
+                gameObject.SetActive(false);
+            }
+        }
+    }
 }
