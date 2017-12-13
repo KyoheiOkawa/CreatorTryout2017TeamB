@@ -19,7 +19,7 @@ public class SoundVolume
 	public void Reset()
 	{
 		bgm = 1.0f;
-		se = 1.0f;
+		se = 0.3f;
 		mute = false;
 	}
 }
