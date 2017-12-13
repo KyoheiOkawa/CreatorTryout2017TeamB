@@ -27,6 +27,9 @@ public class ResultPanelManager : MonoBehaviour
 
 	void ShowPanel(string panelName)
 	{
+		if (GameObject.FindObjectOfType<ResultPanel> ())
+			return;
+
 		var canvas = GameObject.Find ("Canvas");
 
 		GameObject panel = Instantiate (Resources.Load (panelName) as GameObject);

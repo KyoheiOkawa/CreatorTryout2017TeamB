@@ -64,6 +64,9 @@ public class PlayerController : MonoBehaviour
 		// デバイスの傾きを取得
 		deviceRotation = Input.gyro.attitude;
 
+		//デバイスの傾きを反映
+		transform.rotation = new Quaternion (0, 0, deviceRotation.z, deviceRotation.w);
+
         if (transform.localEulerAngles.z >= 320 || transform.localEulerAngles.z <= 90)
         {
             transform.localEulerAngles = new Vector3(0, 0, 320);
@@ -73,7 +76,7 @@ public class PlayerController : MonoBehaviour
             transform.localEulerAngles = new Vector3(0, 0, 200);
         }
 
-        downSpeed = Mathf.Abs(transform.rotation.z) /  -0.7f;
+		downSpeed = Mathf.Abs (transform.rotation.z) / -0.7f * 5.0f;
 
         
         // 機体の移動
