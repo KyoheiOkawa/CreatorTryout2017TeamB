@@ -31,7 +31,9 @@ public class TitleManager : MonoBehaviour
 		{
 			SceneNext ();
 			isChanged = true;
-		}
+
+            GameObject.Find("AudioManager").GetComponent<AudioManager>().PlaySE("enter");
+        }
     }
 
     private void SceneNext()
