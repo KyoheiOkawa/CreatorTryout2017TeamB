@@ -23,6 +23,8 @@ public class MainManager : MonoBehaviour
 
 	[SerializeField]
 	GameObject failedEffect;
+	[SerializeField]
+	GameObject failedEffect2;
 
 	public void FailedGame(Vector3 particlePos)
 	{
@@ -31,6 +33,7 @@ public class MainManager : MonoBehaviour
 		ResultPanelManager.Instance.ShowFailedPanel ();
 
 		Instantiate (failedEffect, particlePos, Quaternion.identity);
+		Instantiate (failedEffect2, particlePos, Quaternion.identity);
 	}
 
 	public void ClearGame()
