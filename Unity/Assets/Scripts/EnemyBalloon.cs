@@ -5,23 +5,26 @@ using UnityEngine;
 //Balloon
 public class EnemyBalloon : MonoBehaviour {
 
-    public GameObject player;
-
-    // 表示範囲
+    // 表示範囲の最小
     public float minRange;
+    // 表示範囲の最大
     public float maxRange;
-    public float bulloonRange;
-    public float bulloonRange1;
+    // Playerとの最小間隔
+    public float bullRangeMin;
+    // Playerとの最大間隔
+    public float bullRangeMax;
 
-    // Baloonｽﾋﾟｰﾄﾞ
+
+    // 最小ｽﾋﾟｰﾄﾞ
     public float minSpeed;
+    // 最大ｽﾋﾟｰﾄﾞ
     public float maxSpeed;
 
 
-    // ｽﾋﾟｰﾄﾞ値の保存用変数
+    // 移動ｽﾋﾟｰﾄﾞｽﾋﾟｰﾄﾞ値の保存用変数
     [SerializeField]
-    // 移動ｽﾋﾟｰﾄﾞ
     private float moveSpeed;
+    // playerとの間隔
     private float rangeBalloon;
 
     // 待機　true:待機 / false: 
@@ -29,72 +32,66 @@ public class EnemyBalloon : MonoBehaviour {
 
     void Start ()
     {
-        player = GameObject.Find("player");
-
-        bulloonRange  = 10;
-        bulloonRange1 = 25;
-   
-
         // 初期化
         minSpeed = 0.01f;
         maxSpeed = 0.08f;
-        // ｽﾋﾟｰﾄﾞのﾗﾝﾀﾞﾑ値の取得
+
+        bullRangeMin = 10.0f;
+        bullRangeMax = 25.0f;
+
         moveSpeed    = Random.Range(minSpeed, maxSpeed);
     }
 
     void Update()
     {
-        WaitCheck();
-        // 移動
+        RestartSet();
         BalloonMove();
-
-        minRange = player.transform.position.x + bulloonRange;
-        maxRange = player.transform.position.x + bulloonRange1;
     }
 
     // 可視状態
     void OnBecameVisible()
     {
         Debug.Log("ok");
-        enabled = true;
     }
 
     // 移動
     void BalloonMove()
     {
-        if(this.transform.position.y < Camera.main.transform.position.y+10)
+        if(this.transform.position.y < Camera.main.transform.position.y + bullRangeMin)
         {
-            if(waitFlag == false)
-            {
-                this.transform.position += new Vector3(0, moveSpeed, 0);
-            }
+            this.transform.position += new Vector3(0, moveSpeed, 0);
+            waitFlag = false;
         }
         else
         {
             waitFlag = true;
+            minRange = PlayerController.Instance.transform.position.x + bullRangeMin;
+            maxRange = PlayerController.Instance.transform.position.x + bullRangeMax;
         }
     }
 
-    // 気球の待機
-    void WaitCheck()
+    // 再配置
+    void RestartSet()
     {
-        if (waitFlag == true)
+        if(waitFlag)
         {
             // 次の配置を行う
             Debug.Log("再配置するよ");
+
             // 再描画範囲のﾗﾝﾀﾞﾑ値取得
             rangeBalloon = Random.Range(minRange, maxRange);
 
+            // ｽﾋﾟｰﾄﾞのﾗﾝﾀﾞﾑ値の取得
+            moveSpeed = Random.Range(minSpeed, maxSpeed);
+
             // 再配置の座標
-            this.transform.position = new Vector3(rangeBalloon, -15, 5);
+            this.transform.position = new Vector3(rangeBalloon, PlayerController.Instance.transform.position.y -15, 5);
         }
         else
-        {
-            // 何もしない
+        { // 何もなし
         }
         waitFlag = false;
     }
-
 
 }
 
