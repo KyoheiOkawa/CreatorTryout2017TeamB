@@ -12,14 +12,14 @@ using UnityEngine;
 public class SoundVolume
 {
 	public float bgm = 1.0f;
-	public float se = 1.0f;
+	public float se = 0.3f;
 
 	public bool mute = false;
 
 	public void Reset()
 	{
 		bgm = 1.0f;
-		se = 1.0f;
+		se = 0.3f;
 		mute = false;
 	}
 }
@@ -65,8 +65,8 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
 			seSources[i] = gameObject.AddComponent<AudioSource>();
 		}
 
-		bgmClips = Resources.LoadAll<AudioClip>("Audio/BGM");
-		seClips = Resources.LoadAll<AudioClip>("Audio/SE");
+		bgmClips = Resources.LoadAll<AudioClip>("Sound/BGM");
+		seClips = Resources.LoadAll<AudioClip>("Sound/SE");
 
 		//dictionaryに名前登録
 		for (int i = 0; i < bgmClips.Length; i++)
@@ -146,21 +146,22 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     /// <summary>
     ///　SEの再生をファイル名で指定
     /// </summary>
-    public void PlaySE(string name)
+    public void PlaySE(string name,float volume)
 	{
-		PlaySE(seDictionary[name]);
+		PlaySE(seDictionary[name],volume);
 	}
 
     /// <summary>
     ///　SEの再生を読み込み順の番号で指定
     /// </summary>
-    public void PlaySE(int number)
+    public void PlaySE(int number, float volume)
 	{
 		if (!seRequestQueue.Contains(number))
 		{
 			seRequestQueue.Enqueue(number);
-		}
-	}
+        }
+        seSources[number].volume = volume;
+    }
 
     /// <summary>
     ///　BGMを停止

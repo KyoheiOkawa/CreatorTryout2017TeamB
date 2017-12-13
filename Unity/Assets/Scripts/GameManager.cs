@@ -57,6 +57,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
         yield return new WaitForSeconds(1);
 
+        GameObject.Find("AudioManager").GetComponent<AudioManager>().StopBGM();
+
         async.allowSceneActivation = true;    // シーン遷移許可
 		isLoadingNextScene = false;
     }
