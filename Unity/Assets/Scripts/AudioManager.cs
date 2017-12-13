@@ -146,21 +146,22 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     /// <summary>
     ///　SEの再生をファイル名で指定
     /// </summary>
-    public void PlaySE(string name)
+    public void PlaySE(string name,float volume)
 	{
-		PlaySE(seDictionary[name]);
+		PlaySE(seDictionary[name],volume);
 	}
 
     /// <summary>
     ///　SEの再生を読み込み順の番号で指定
     /// </summary>
-    public void PlaySE(int number)
+    public void PlaySE(int number, float volume)
 	{
 		if (!seRequestQueue.Contains(number))
 		{
 			seRequestQueue.Enqueue(number);
-		}
-	}
+        }
+        seSources[number].volume = volume;
+    }
 
     /// <summary>
     ///　BGMを停止

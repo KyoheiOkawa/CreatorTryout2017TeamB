@@ -14,12 +14,12 @@ public class ResultPanel : MonoBehaviour
 		scene = SceneManager.GetActiveScene ();
 
 		FadeManager.Instance.Transition (0.5f, scene.name);
-        GameObject.Find("AudioManager").GetComponent<AudioManager>().PlaySE("enter");
+        GameObject.Find("AudioManager").GetComponent<AudioManager>().PlaySE("enter",0.1f);
     }
 
 	public void OnTitleButton()
 	{
 		FadeManager.Instance.Transition(0.5f,titleSceneName);
-        GameObject.Find("AudioManager").GetComponent<AudioManager>().PlaySE("enter");
+        GameObject.Find("AudioManager").GetComponent<AudioManager>().PlaySE("enter", 0.1f);
     }
 }

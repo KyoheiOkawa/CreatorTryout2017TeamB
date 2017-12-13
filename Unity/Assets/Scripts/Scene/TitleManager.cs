@@ -32,7 +32,7 @@ public class TitleManager : MonoBehaviour
 			SceneNext ();
 			isChanged = true;
 
-            GameObject.Find("AudioManager").GetComponent<AudioManager>().PlaySE("enter");
+            GameObject.Find("AudioManager").GetComponent<AudioManager>().PlaySE("enter",0.1f);
         }
     }
 
