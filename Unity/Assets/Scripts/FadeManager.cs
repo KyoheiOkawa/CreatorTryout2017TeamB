@@ -95,14 +95,16 @@ public class FadeManager : Graphic
 			});
 	}
 
-	public void Transition(float time, string transSceneName)
+	public void Transition(float time, string transSceneName,float fadeBeginTime = 0.0f)
 	{
-		StartCoroutine(FadeWithSceneChange(time, transSceneName));
+		StartCoroutine(FadeWithSceneChange(time, transSceneName,fadeBeginTime));
 	}
 
-	IEnumerator FadeWithSceneChange(float time, string nextSceneName)
+	IEnumerator FadeWithSceneChange(float time, string nextSceneName,float fadeBeginTime = 0.0f)
 	{
 		SetRayCastBlock(false);
+
+		yield return new WaitForSeconds (fadeBeginTime);
 
 		while (true)
 		{
