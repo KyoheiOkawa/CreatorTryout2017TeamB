@@ -7,13 +7,17 @@ using UnityEngine;
 /// </summary>
 public class TitleManager : MonoBehaviour
 {
-    private GameManager game;
+    private GameManager     game;
+    private AudioManager    audio;
 
 	bool isChanged = false;
 
 	private void Start()
 	{
         game = GameObject.Find("GameManager").GetComponent<GameManager>();
+        audio = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+
+        audio.PlayBGM("title",0.1f,true);
 	}
 
 	private void Update()

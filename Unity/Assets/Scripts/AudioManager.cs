@@ -65,8 +65,8 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
 			seSources[i] = gameObject.AddComponent<AudioSource>();
 		}
 
-		bgmClips = Resources.LoadAll<AudioClip>("Audio/BGM");
-		seClips = Resources.LoadAll<AudioClip>("Audio/SE");
+		bgmClips = Resources.LoadAll<AudioClip>("Sound/BGM");
+		seClips = Resources.LoadAll<AudioClip>("Sound/SE");
 
 		//dictionaryに名前登録
 		for (int i = 0; i < bgmClips.Length; i++)
