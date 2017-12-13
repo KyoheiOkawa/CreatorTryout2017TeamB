@@ -7,8 +7,9 @@ public class MainManager : MonoBehaviour
 	public enum State
 	{
 		Playing,
+        Grounded,
 		Failed,
-		Clear
+		Clear,
 	}
 
 	State state = State.Playing;
@@ -25,6 +26,11 @@ public class MainManager : MonoBehaviour
 	GameObject failedEffect;
 	[SerializeField]
 	GameObject failedEffect2;
+
+    public void Ground()
+    {
+        state = State.Grounded;
+    }
 
 	public void FailedGame(Vector3 particlePos)
 	{
