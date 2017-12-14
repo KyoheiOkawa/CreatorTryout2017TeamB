@@ -442,6 +442,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   titleSceneName: Title
+  panelImg: {fileID: 114191263659542934}
+  retryButton: {fileID: 114818304479572648}
+  titleButton: {fileID: 114125962487828916}
+  fadeTime: 0.5
 --- !u!222 &222178441360240026
 CanvasRenderer:
   m_ObjectHideFlags: 1
