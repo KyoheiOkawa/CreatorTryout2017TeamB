@@ -8,7 +8,10 @@ public class EnemyAirplaneDown : MonoBehaviour {
     public float ResetDistance = 6.0f;
 
     // プレイヤーからどのくらい先に場所の設定をするか
-    private float PosX = 18.0f;
+    private float PosX = 22.0f;
+
+    // プレイヤーからどのくらい上に場所の設定をするか
+    private float PosY = 20.0f;
 
     private Vector3 Speed;
 
@@ -19,7 +22,7 @@ public class EnemyAirplaneDown : MonoBehaviour {
     public float MaxSpeed = 5f;
 
     // 最低落下速度
-    public float MinDownSpeed = 8f;
+    public float MinDownSpeed = 10f;
 
     // 最大落下速度
     public float MaxDownSpeed = 16f;
@@ -54,7 +57,7 @@ public class EnemyAirplaneDown : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        this.transform.position = new Vector3(PosX, Random.Range(MinHeight, MaxHeight) + 10.0f, 0.0f) + PlayerController.Instance.transform.position;
+        this.transform.position = new Vector3(PosX, Random.Range(MinHeight, MaxHeight) + PosY, 0.0f) + PlayerController.Instance.transform.position;
 
         Speed = new Vector3(Random.Range(MinSpeed, MaxSpeed), Random.Range(MinDownSpeed, MaxDownSpeed), 0.0f);
 
@@ -74,7 +77,7 @@ public class EnemyAirplaneDown : MonoBehaviour {
             {
                 IsMove = true;
 
-                this.transform.position = new Vector3(PosX, Random.Range(MinHeight, MaxHeight) + 10.0f, 0.0f) + PlayerController.Instance.transform.position;
+                this.transform.position = new Vector3(PosX, Random.Range(MinHeight, MaxHeight) + PosY, 0.0f) + PlayerController.Instance.transform.position;
 
                 StartFlag = true;
             }
@@ -101,7 +104,7 @@ public class EnemyAirplaneDown : MonoBehaviour {
 
                     // MinHeight ～ MaxHeight内のランダム数を高さに設定する
                     // Random.Range(MinHeight, MaxHeight), 0.0f)
-                    this.transform.position = new Vector3(PosX, Random.Range(MinHeight, MaxHeight) + 10.0f, 0.0f) + PlayerController.Instance.transform.position;
+                    this.transform.position = new Vector3(PosX, Random.Range(MinHeight, MaxHeight) + PosY, 0.0f) + PlayerController.Instance.transform.position;
                 }
             }
         }

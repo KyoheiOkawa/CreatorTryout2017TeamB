@@ -10,15 +10,16 @@ public class EnemyAI : MonoBehaviour
     public float ResetDistance = 6.0f;
 
     // プレイヤーからどのくらい先に場所の設定をするか
-    private float PosX = 18.0f;
+    private float PosX = 35.0f;
 
+    // 速度
     private Vector3 Speed ;
 
     // 最低速度
-    public float MinSpeed = 1f;
+    public float MinSpeed = 3f;
 
     // 最大速度
-    public float MaxSpeed = 5f;
+    public float MaxSpeed = 8f;
 
     // 最低何秒後にリセットするか
     public float ResetMinTime = 0;
@@ -33,7 +34,6 @@ public class EnemyAI : MonoBehaviour
     public float MaxHeight = -3.0f;
 
     // カウント用変数
-    [SerializeField]
     private float Cnt;
 
     // 移動フラグ
@@ -74,7 +74,7 @@ public class EnemyAI : MonoBehaviour
             {
                 IsMove = true;
 
-                this.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+                this.transform.position = new Vector3(PosX, Random.Range(MinHeight, MaxHeight), 0.0f) + PlayerController.Instance.transform.position;
 
                 StartFlag = true;
             }
@@ -87,8 +87,8 @@ public class EnemyAI : MonoBehaviour
 
                 ResetCnt -= Time.deltaTime;
 
-                if (ResetCnt < 0 && PlayerController.Instance.Feed > 15.0f)
-                    NewValueSet();
+                //if (ResetCnt < 0 && PlayerController.Instance.Feed > 15.0f)
+                //    NewValueSet();
             }
             else if (!EndFlag)
             {
@@ -99,6 +99,7 @@ public class EnemyAI : MonoBehaviour
                 {
                     IsMove = true;
 
+                    if (PlayerController.Instance == null) return;
                     // MinHeight ～ MaxHeight内のランダム数を高さに設定する
                     // Random.Range(MinHeight, MaxHeight), 0.0f)
                     this.transform.position = new Vector3(PosX, Random.Range(MinHeight, MaxHeight), 0.0f) + PlayerController.Instance.transform.position;
@@ -132,15 +133,15 @@ public class EnemyAI : MonoBehaviour
         ResetCnt = 3;
     }
 
-    //void OnBecameInvisible()
-    //{
-    //    if (this != null || PlayerController.Instance.Feed > 15.0f)
-    //        NewValueSet();
-    //    else
-    //    {
-    //        IsMove = false;
-    //
-    //        EndFlag = true ;
-    //    }
-    //}
+    void OnBecameInvisible()
+    {
+        if (this != null || PlayerController.Instance.Feed > 15.0f)
+            NewValueSet();
+        else
+        {
+            IsMove = false;
+
+            EndFlag = true;
+        }
+    }
 }
