@@ -6,20 +6,21 @@ using UnityEngine;
 public class EnemyBalloon : MonoBehaviour
 {
 
-    // 表示範囲の最小
-    public float minDrawRangeWidth;
+    // X軸の表示範囲の最小
+    public float minDrawX;
     // 表示範囲の最大
-    public float maxDrawRangeWidth;
+    public float maxDrawX;
+
+    // 表示範囲の最小
+    public float minDrawY = -10.0f;
+    // 表示範囲の最大
+    public float maxDrawY = 0.0f;
 
     // Playerとの最小間隔
     public float minPLRange = 10.0f;
     // Playerとの最大間隔
     public float maxPLRange = 40.0f;
 
-    // 表示範囲の最小
-    public float minDrawRangeHeight = -10.0f;
-    // 表示範囲の最大
-    public float maxDrawRangeHeight = 0.0f;
 
     //0.1の判定
     public int zeroORone;
@@ -30,14 +31,13 @@ public class EnemyBalloon : MonoBehaviour
     public int maxWaitTime = 5;
 
 
-
-    // 移動ｽﾋﾟｰﾄﾞｽﾋﾟｰﾄﾞ値の保存用変数
+    // 移動ｽﾋﾟｰﾄﾞﾗﾝﾀﾞﾑ値の保存用変数
     [SerializeField]
     private float moveSpeed;
 
-    // 再生成までの時間
+    // 待機[再生成まで]時間
     [SerializeField]
-    private float resTime;
+    private float WaitTime;
 
     // 最小ｽﾋﾟｰﾄﾞ
     [SerializeField]
@@ -51,12 +51,9 @@ public class EnemyBalloon : MonoBehaviour
     [SerializeField]
     private float groundHeight = 20.0f;
 
-    // 縦からか横かの判定
-    private float heiORwid;
-
     // playerとの間隔
-    private float rangeBalloonW;
-    private float rangeBalloonH;
+    private float reposX;
+    private float reposY;
 
     // 待機　true:待機 / false: 
     private bool waitFlag;
@@ -67,7 +64,7 @@ public class EnemyBalloon : MonoBehaviour
         // 初期化
         moveSpeed = Random.Range(minSpeed, maxSpeed);
         // 待機時間のﾗﾝﾀﾞﾑ値取得
-        resTime = Random.Range(minWaitTime, maxWaitTime);
+        WaitTime = Random.Range(minWaitTime, maxWaitTime);
     }
 
     void Update()
@@ -84,24 +81,19 @@ public class EnemyBalloon : MonoBehaviour
     {
         if (this.transform.position.y < Camera.main.transform.position.y + maxWaitTime)
         {
-            if (zeroORone == 0)
-            {
-                this.transform.position += new Vector3(0.0f, moveSpeed, 0.0f) * Time.deltaTime;
-            }
-            else if (zeroORone == 1)
-            {
-                this.transform.position += new Vector3(0.0f, moveSpeed, 0.0f) * Time.deltaTime;
-            }
             waitFlag = false;
+            // 座標加算[上昇]
+            this.transform.position += new Vector3(0.0f, moveSpeed, 0.0f) * Time.deltaTime;
+
         }
         else
         {
-            resTime -= Time.deltaTime;
-            if (resTime < 0)
+            WaitTime -= Time.deltaTime;
+            if (WaitTime < 0)
             {
                 waitFlag = true;
-				minDrawRangeWidth = PlayerController.Instance.transform.position.x + 6;
-                maxDrawRangeWidth = PlayerController.Instance.transform.position.x + 7;
+                minDrawX = PlayerController.Instance.transform.position.x + 6;
+                maxDrawX = PlayerController.Instance.transform.position.x + 7;
             }
         }
     }
@@ -113,39 +105,32 @@ public class EnemyBalloon : MonoBehaviour
         {
             if (PlayerController.Instance.Feed > groundHeight)
             {
-                // ｽﾋﾟｰﾄﾞのﾗﾝﾀﾞﾑ値の取得
                 moveSpeed = Random.Range(minSpeed, maxSpeed);
 
-                // 待機時間のﾗﾝﾀﾞﾑ値取得
-                resTime = Random.Range(minWaitTime, maxWaitTime);
+                WaitTime = Random.Range(minWaitTime, maxWaitTime);
 
                 // 0.1の判定用
                 zeroORone = Random.Range(0, 2);
 
                 if (zeroORone == 0)
                 {
-                    rangeBalloonW = Random.Range(minDrawRangeWidth, maxDrawRangeWidth);
-                    heiORwid = rangeBalloonW;
-                    // 再配置の座標
-                    this.transform.position = new Vector3(heiORwid, PlayerController.Instance.transform.position.y - minPLRange, 0);
+                    reposX = Random.Range(minDrawX, maxDrawX);
+                    // 再配置[座標]
+                    this.transform.position = new Vector3(reposX, PlayerController.Instance.transform.position.y - minPLRange, 0);
 
                 }
                 else if (zeroORone == 1)
                 {
-                    rangeBalloonH = Random.Range(minDrawRangeHeight, maxDrawRangeHeight);
-                    heiORwid = rangeBalloonH;
+
+                    reposY = Random.Range(minDrawY, maxDrawY);
                     // 再配置の座標
-                    this.transform.position = PlayerController.Instance.transform.position + new Vector3(24, heiORwid, 0.0f);
+                    this.transform.position = PlayerController.Instance.transform.position + new Vector3(24, reposY, 0.0f);
                 }
                 else
-                {
-                    // 何もなし
+                {// 何もなし
                 }
             }
-            else
-            {
-                waitFlag = false;
-            }
+            else { }
         }
         else
         { // 何もなし
