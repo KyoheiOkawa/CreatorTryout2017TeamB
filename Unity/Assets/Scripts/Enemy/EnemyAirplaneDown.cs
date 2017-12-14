@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour
-{
-    //public GameObject Player;
+public class EnemyAirplaneDown : MonoBehaviour {
 
     // プレイヤーからどのくらい離れたら位置のリセットを行うか
     public float ResetDistance = 6.0f;
@@ -12,7 +10,7 @@ public class EnemyAI : MonoBehaviour
     // プレイヤーからどのくらい先に場所の設定をするか
     private float PosX = 18.0f;
 
-    private Vector3 Speed ;
+    private Vector3 Speed;
 
     // 最低速度
     public float MinSpeed = 1f;
@@ -20,11 +18,17 @@ public class EnemyAI : MonoBehaviour
     // 最大速度
     public float MaxSpeed = 5f;
 
-    // 最低何秒後にリセットするか
-    public float ResetMinTime = 0;
+    // 最低落下速度
+    public float MinDownSpeed = 8f;
 
-    // 最大何秒後にリセットするか
-    public float ResetMaxTime = 3;
+    // 最大落下速度
+    public float MaxDownSpeed = 16f;
+
+    // 最低何秒後にポジションリセットするか
+    public float ResetMinTime = 3;
+
+    // 最大何秒後にポジションリセットするか
+    public float ResetMaxTime = 5;
 
     // 最低の高さ
     public float MinHeight = -7.0f;
@@ -33,30 +37,26 @@ public class EnemyAI : MonoBehaviour
     public float MaxHeight = -3.0f;
 
     // カウント用変数
-    [SerializeField]
     private float Cnt;
-
-    // 移動フラグ
-    private bool IsMove = false;
 
     // 何秒後にリセットするか
     private float ResetCnt = 5;
 
+    // 移動フラグ
+    private bool IsMove = false;
+
     // スタート秒数
-    public float StartTime = 3;
+    public float StartTime = 5;
 
     // スタートフラグ
     private bool StartFlag = false;
 
-    // エンドフラグ
-    private bool EndFlag = false;
-
     // Use this for initialization
     void Start()
     {
-        this.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+        this.transform.position = new Vector3(PosX, Random.Range(MinHeight, MaxHeight) + 10.0f, 0.0f) + PlayerController.Instance.transform.position;
 
-        Speed = new Vector3(Random.Range(MinSpeed, MaxSpeed), 0.0f, 0.0f);
+        Speed = new Vector3(Random.Range(MinSpeed, MaxSpeed), Random.Range(MinDownSpeed, MaxDownSpeed), 0.0f);
 
         Cnt = Random.Range(ResetMinTime, ResetMaxTime);
     }
@@ -74,7 +74,7 @@ public class EnemyAI : MonoBehaviour
             {
                 IsMove = true;
 
-                this.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+                this.transform.position = new Vector3(PosX, Random.Range(MinHeight, MaxHeight) + 10.0f, 0.0f) + PlayerController.Instance.transform.position;
 
                 StartFlag = true;
             }
@@ -87,10 +87,10 @@ public class EnemyAI : MonoBehaviour
 
                 ResetCnt -= Time.deltaTime;
 
-                if (ResetCnt < 0 && PlayerController.Instance.Feed > 15.0f)
+                if (ResetCnt < 0 && PlayerController.Instance.Feed > 30.0f)
                     NewValueSet();
             }
-            else if (!EndFlag)
+            else
             {
                 //1秒に1ずつ減らしていく
                 Cnt -= Time.deltaTime;
@@ -101,7 +101,7 @@ public class EnemyAI : MonoBehaviour
 
                     // MinHeight ～ MaxHeight内のランダム数を高さに設定する
                     // Random.Range(MinHeight, MaxHeight), 0.0f)
-                    this.transform.position = new Vector3(PosX, Random.Range(MinHeight, MaxHeight), 0.0f) + PlayerController.Instance.transform.position;
+                    this.transform.position = new Vector3(PosX, Random.Range(MinHeight, MaxHeight) + 10.0f, 0.0f) + PlayerController.Instance.transform.position;
                 }
             }
         }
@@ -123,7 +123,7 @@ public class EnemyAI : MonoBehaviour
         // プレイヤーより手前に自分がいたら返す
         if (this.transform.position.x > PlayerController.Instance.transform.position.x + ResetDistance) return;
 
-        Speed = new Vector3(Random.Range(MinSpeed, MaxSpeed), 0.0f, 0.0f);
+        Speed = new Vector3(Random.Range(MinSpeed, MaxSpeed), Random.Range(MinDownSpeed, MaxDownSpeed), 0.0f);
 
         Cnt = Random.Range(ResetMinTime, ResetMaxTime);
 
@@ -136,11 +136,5 @@ public class EnemyAI : MonoBehaviour
     //{
     //    if (this != null || PlayerController.Instance.Feed > 15.0f)
     //        NewValueSet();
-    //    else
-    //    {
-    //        IsMove = false;
-    //
-    //        EndFlag = true ;
-    //    }
     //}
 }
