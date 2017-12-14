@@ -40,6 +40,9 @@ public class PlayerHitCheck : MonoBehaviour
         if (mainManager.NowState != MainManager.State.Playing)
             return;
 
+		if(transform.position.y < 5.0f)
+			Camera.main.GetComponent<CameraScript> ().ClearClose ();
+
         Vector3 start = transform.position + capusule.center + transform.up * (capusule.height / 2.0f);
         Vector3 end = transform.position + capusule.center + transform.up * -(capusule.height / 2.0f);
 
@@ -49,6 +52,8 @@ public class PlayerHitCheck : MonoBehaviour
         {
             if (col.gameObject.CompareTag("Ground"))
             {
+				mainManager.Ground ();
+
                 float angle = Vector3.Angle(transform.up, Vector3.right);
 
                 if (angle <= successAngle)

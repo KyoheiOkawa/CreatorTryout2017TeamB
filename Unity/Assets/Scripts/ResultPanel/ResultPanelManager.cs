@@ -42,7 +42,7 @@ public class ResultPanelManager : MonoBehaviour
 	{
 		var audio = GameObject.Find ("AudioManager").GetComponent<AudioManager> ();
 		audio.StopBGM ();
-		StartCoroutine (WaitShowClearPanel (5.5f));
+		StartCoroutine (WaitShowClearPanel (3.0f));
 		audio.PlaySE ("clear", 0.5f);
 	}
 

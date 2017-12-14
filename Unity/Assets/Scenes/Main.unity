@@ -205,6 +205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee308b36b514040cd89cfac44d92038e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: {x: 15, y: -5, z: -15}
+  clearCloseOffset: {x: 0, y: 3, z: -10}
 --- !u!1 &118553918
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,7 +706,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 713148537}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -416.02997, y: 426.265, z: 0}
+  m_LocalPosition: {x: -416.02997, y: 302.66724, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1361082142}
@@ -1030,8 +1032,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 948428474}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 508, y: 381, z: 0}
-  m_LocalScale: {x: 0.76969695, y: 0.76969695, z: 0.76969695}
+  m_LocalPosition: {x: 813, y: 457.5, z: 0}
+  m_LocalScale: {x: 1.2318182, y: 1.2318182, z: 1.2318182}
   m_Children:
   - {fileID: 843976634}
   - {fileID: 713148538}
