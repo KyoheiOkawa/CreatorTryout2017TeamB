@@ -48,12 +48,7 @@ public class ResultPanelManager : MonoBehaviour
 
 	public void ShowFailedPanel()
 	{
-		StartCoroutine (WaitShowFailedPanel (0.2f));
-        ShowPanel("FailedPanel");
-        StartCoroutine(WaitShowFailedPanel(0.3f));
-        GameObject.Find("RetryButton").SetActive(true);
-        GameObject.Find("ToTitleButton").SetActive(true);
-        GameObject.Find("Failed").SetActive(false);
+		StartCoroutine (WaitShowFailedPanel (0.5f));
     }
 
 	IEnumerator WaitShowClearPanel(float waitTime)

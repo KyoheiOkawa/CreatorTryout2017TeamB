@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 7ed04a6d8fbfa4fd4ad7ee2d44ffaa94
-timeCreated: 1513129046
+guid: 183801ab1b38c445db6ed0572d97b0ac
+timeCreated: 1513239987
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -17,8 +17,8 @@ ModelImporter:
     100018: polySurface19
     100020: polySurface3
     100022: polySurface4
-    100024: Sharin_L_grp1
-    100026: Sharin_R_grp1
+    100024: Sharin_L_grp
+    100026: Sharin_R_grp
     400000: //RootNode
     400002: Body_geo
     400004: polySurface10
@@ -31,44 +31,42 @@ ModelImporter:
     400018: polySurface19
     400020: polySurface3
     400022: polySurface4
-    400024: Sharin_L_grp1
-    400026: Sharin_R_grp1
-    2300000: //RootNode
-    2300002: Body_geo
-    2300004: polySurface10
-    2300006: polySurface11
-    2300008: polySurface12
-    2300010: polySurface13
-    2300012: polySurface14
-    2300014: polySurface15
-    2300016: polySurface16
-    2300018: polySurface19
-    2300020: polySurface3
-    2300022: polySurface4
-    3300000: //RootNode
-    3300002: Body_geo
-    3300004: polySurface10
-    3300006: polySurface11
-    3300008: polySurface12
-    3300010: polySurface13
-    3300012: polySurface14
-    3300014: polySurface15
-    3300016: polySurface16
-    3300018: polySurface19
-    3300020: polySurface3
-    3300022: polySurface4
-    4300000: Airplane_geo
-    4300002: Body_geo
-    4300004: polySurface13
-    4300006: polySurface14
-    4300008: polySurface16
-    4300010: polySurface15
-    4300012: polySurface19
-    4300014: polySurface4
-    4300016: polySurface3
-    4300018: polySurface12
-    4300020: polySurface10
-    4300022: polySurface11
+    400024: Sharin_L_grp
+    400026: Sharin_R_grp
+    2300000: Body_geo
+    2300002: polySurface10
+    2300004: polySurface11
+    2300006: polySurface12
+    2300008: polySurface13
+    2300010: polySurface14
+    2300012: polySurface15
+    2300014: polySurface16
+    2300016: polySurface19
+    2300018: polySurface3
+    2300020: polySurface4
+    3300000: Body_geo
+    3300002: polySurface10
+    3300004: polySurface11
+    3300006: polySurface12
+    3300008: polySurface13
+    3300010: polySurface14
+    3300012: polySurface15
+    3300014: polySurface16
+    3300016: polySurface19
+    3300018: polySurface3
+    3300020: polySurface4
+    4300000: Body_geo
+    4300002: polySurface13
+    4300004: polySurface14
+    4300006: polySurface16
+    4300008: polySurface15
+    4300010: polySurface19
+    4300012: polySurface4
+    4300014: polySurface3
+    4300016: polySurface12
+    4300018: polySurface10
+    4300020: polySurface11
+    7400000: Take 001
     9500000: //RootNode
   externalObjects:
   - first:

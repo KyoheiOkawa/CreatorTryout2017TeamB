@@ -90,7 +90,7 @@ public class EnemyBalloon : MonoBehaviour
             }
             else if (zeroORone == 1)
             {
-                this.transform.position -= new Vector3(0.0f, moveSpeed, 0.0f) * Time.deltaTime;
+                this.transform.position += new Vector3(0.0f, moveSpeed, 0.0f) * Time.deltaTime;
             }
             waitFlag = false;
         }
@@ -100,8 +100,8 @@ public class EnemyBalloon : MonoBehaviour
             if (resTime < 0)
             {
                 waitFlag = true;
-                minDrawRangeWidth = PlayerController.Instance.transform.position.x + 20;
-                maxDrawRangeWidth = PlayerController.Instance.transform.position.x + 30;
+				minDrawRangeWidth = PlayerController.Instance.transform.position.x + 6;
+                maxDrawRangeWidth = PlayerController.Instance.transform.position.x + 7;
             }
         }
     }
@@ -135,7 +135,7 @@ public class EnemyBalloon : MonoBehaviour
                     rangeBalloonH = Random.Range(minDrawRangeHeight, maxDrawRangeHeight);
                     heiORwid = rangeBalloonH;
                     // 再配置の座標
-                    this.transform.position = PlayerController.Instance.transform.position + new Vector3(groundHeight, heiORwid, 0.0f);
+                    this.transform.position = PlayerController.Instance.transform.position + new Vector3(24, heiORwid, 0.0f);
                 }
                 else
                 {
