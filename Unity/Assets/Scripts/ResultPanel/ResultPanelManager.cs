@@ -40,13 +40,30 @@ public class ResultPanelManager : MonoBehaviour
 
 	public void ShowClearPanel()
 	{
-		ShowPanel ("ClearPanel");
-        GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayBGM("gameclear", 0.5f, true);
+		var audio = GameObject.Find ("AudioManager").GetComponent<AudioManager> ();
+		audio.StopBGM ();
+		StartCoroutine (WaitShowClearPanel (3.0f));
+		audio.PlaySE ("clear", 0.5f);
 	}
 
 	public void ShowFailedPanel()
 	{
-		ShowPanel ("FailedPanel");
-        GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayBGM("gameover", 1.0f, true);
+		StartCoroutine (WaitShowFailedPanel (0.5f));
     }
+
+	IEnumerator WaitShowClearPanel(float waitTime)
+	{
+		yield return new WaitForSeconds (waitTime);
+
+		GameObject.Find ("AudioManager").GetComponent<AudioManager> ().PlayBGM("gameclear", 0.5f, true);
+		ShowPanel ("ClearPanel");
+	}
+
+	IEnumerator WaitShowFailedPanel(float waitTime)
+	{
+		yield return new WaitForSeconds (waitTime);
+
+		ShowPanel ("FailedPanel");
+		GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayBGM("gameover", 1.0f, true);
+	}
 }
