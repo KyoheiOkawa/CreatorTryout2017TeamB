@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainManager : MonoBehaviour 
 {
@@ -26,10 +27,21 @@ public class MainManager : MonoBehaviour
 	GameObject failedEffect;
 	[SerializeField]
 	GameObject failedEffect2;
+	[SerializeField]
+	Text feedText;
 
 	void Start()
 	{
 		AudioManager.Instance.PlayBGM ("main", 0.5f, true);
+	}
+
+	void Update()
+	{
+		feedText.text = "地表まで残り約：" + PlayerController.Instance.Feed;
+		if (state == State.Grounded || state == State.Failed) 
+		{
+			feedText.enabled = false;
+		}
 	}
 
     public void Ground()
