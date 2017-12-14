@@ -1,93 +1,98 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
 
-    [SerializeField]
-    private float downPow = 5f;
+	[SerializeField]
+	private float downPow = 5f;
 	private float moveSpeed = 5;
 	private float downSpeed;
 	private float upSpeed;
 	private float maxSpeed;
 
-    public float MoveSpeef
-    {
-        get { return moveSpeed; }
-    }
-    private float feed;
-    public float Feed
-    {
-        get { return feed; }
-    }
-    private Quaternion deviceRotation;
+	public float MoveSpeef
+	{
+		get { return moveSpeed; }
+	}
+	private float feed;
+	public float Feed
+	{
+		get { return feed; }
+	}
+	private Quaternion deviceRotation;
 
-    public GameObject groundObj;
+	public GameObject groundObj;
 
-    [HideInInspector]
-    public bool isMove = true;
+	[HideInInspector]
+	public bool isMove = true;
 	private bool isPlayerUp = false;
 
 	private Rigidbody r;
 
-    public static PlayerController Instance;
-    void Awake()
-    {
-        if (null != Instance)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-        }
-    }
-		
-    void Start()
-    {
-		r = GetComponent<Rigidbody> ();
-        // ジャイロを有効にする
-        Input.gyro.enabled = true;
-    }
+	public static PlayerController Instance;
+	void Awake()
+	{
+		if (null != Instance)
+		{
+			Destroy(gameObject);
+		}
+		else
+		{
+			Instance = this;
+		}
+	}
 
-    void Update()
-    {
-        CheckGround();
-        if (isMove)
-        {
+	void Start()
+	{
+		r = GetComponent<Rigidbody> ();
+		// ジャイロを有効にする
+		Input.gyro.enabled = true;
+	}
+
+	void Update()
+	{
+		CheckGround();
+
+		if (isMove) 
+		{
 			CheckGyro ();
-        }
-    }
+		} 
+	}
 
 	void FixedUpdate()
 	{
-		Move ();
+		if (isMove) 
+		{
+			Move ();
+		}
 	}
 
-    // 高度をチェックする
-    void CheckGround()
-    {
-        feed = Mathf.Abs(transform.position.y - groundObj.transform.position.y);
-    }
+	// 高度をチェックする
+	void CheckGround()
+	{
+		feed = Mathf.Abs(transform.position.y - groundObj.transform.position.y);
+	}
 
 	void CheckGyro()
-    {
+	{
 		// デバイスの傾きを取得
 		deviceRotation = Input.gyro.attitude;
 
 		//デバイスの傾きを反映
-		transform.rotation = new Quaternion (0, 0, (deviceRotation.z * 1.5f), (deviceRotation.w * 1.5f));
+		transform.rotation = new Quaternion (0, 0, deviceRotation.z, deviceRotation.w );
 
-        if (transform.localEulerAngles.z >= 320 || transform.localEulerAngles.z <= 90)
-        {
-            transform.localEulerAngles = new Vector3(0, 0, 320);
-        }
-        else if (90 > transform.localEulerAngles.z || transform.localEulerAngles.z <= 200)
-        {
-            transform.localEulerAngles = new Vector3(0, 0, 200);
-        }
-    }
+		if (transform.localEulerAngles.z >= 320 || transform.localEulerAngles.z <= 90)
+		{
+			transform.localEulerAngles = new Vector3(0, 0, 320);
+		}
+		else if (90 > transform.localEulerAngles.z || transform.localEulerAngles.z <= 200)
+		{
+			transform.localEulerAngles = new Vector3(0, 0, 200);
+		}
+	}
 
 
 	// うまくいかなかったらこっち
