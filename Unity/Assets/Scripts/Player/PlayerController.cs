@@ -6,9 +6,12 @@ public class PlayerController : MonoBehaviour
 {
 
     [SerializeField]
-    private float downSpeed = -10f;
-    [SerializeField]
-    private float moveSpeed = 10f;
+    private float downPow = 5f;
+	private float moveSpeed = 5;
+	private float downSpeed;
+	private float upSpeed;
+	private float maxSpeed;
+
     public float MoveSpeef
     {
         get { return moveSpeed; }
@@ -24,6 +27,9 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector]
     public bool isMove = true;
+	private bool isPlayerUp = false;
+
+	private Rigidbody r;
 
     public static PlayerController Instance;
     void Awake()
@@ -37,9 +43,10 @@ public class PlayerController : MonoBehaviour
             Instance = this;
         }
     }
-
+		
     void Start()
     {
+		r = GetComponent<Rigidbody> ();
         // ジャイロを有効にする
         Input.gyro.enabled = true;
     }
@@ -49,9 +56,14 @@ public class PlayerController : MonoBehaviour
         CheckGround();
         if (isMove)
         {
-            Move();
+			CheckGyro ();
         }
     }
+
+	void FixedUpdate()
+	{
+		Move ();
+	}
 
     // 高度をチェックする
     void CheckGround()
@@ -59,13 +71,13 @@ public class PlayerController : MonoBehaviour
         feed = Mathf.Abs(transform.position.y - groundObj.transform.position.y);
     }
 
-    void Move()
+	void CheckGyro()
     {
 		// デバイスの傾きを取得
 		deviceRotation = Input.gyro.attitude;
 
 		//デバイスの傾きを反映
-		transform.rotation = new Quaternion (0, 0, deviceRotation.z, deviceRotation.w);
+		transform.rotation = new Quaternion (0, 0, (deviceRotation.z * 1.5f), (deviceRotation.w * 1.5f));
 
         if (transform.localEulerAngles.z >= 320 || transform.localEulerAngles.z <= 90)
         {
@@ -75,11 +87,96 @@ public class PlayerController : MonoBehaviour
         {
             transform.localEulerAngles = new Vector3(0, 0, 200);
         }
-
-		downSpeed = Mathf.Abs (transform.rotation.z) / -0.7f * 5.0f;
-
-        
-        // 機体の移動
-        transform.position += new Vector3(moveSpeed, downSpeed, 0) * Time.deltaTime;
     }
+
+
+	// うまくいかなかったらこっち
+	//-----------------------------------------------------------------------
+	/*
+	void Move()
+	{
+		// 落下速度を設定（デバイスの傾きによって変化させる）
+		downSpeed = Mathf.Abs (transform.rotation.z) / -0.7f * downPow;
+
+		if (Mathf.Abs(downSpeed) <= downPow) 
+		{
+			if (!isPlayerUp) 
+			{
+				isPlayerUp = true;
+				if (Mathf.Abs(maxSpeed) >= 5.5f)
+				{
+					upSpeed = Mathf.Abs (maxSpeed);
+					StartCoroutine (UpMove ());
+					maxSpeed = 0;
+				}
+			}
+		}
+
+		else 
+		{
+			isPlayerUp = false;
+			// 機体の速度を設定する
+			r.velocity = new Vector3 (Mathf.Abs(moveSpeed), downSpeed, 0);
+			if (maxSpeed > downSpeed) 
+			{
+				maxSpeed = downSpeed;
+			}
+		}
+	}
+	*/
+	//-----------------------------------------------------------------------
+
+	void Move()
+	{
+		// 落下速度を設定（デバイスの傾きによって変化させる）
+		downSpeed = Mathf.Abs (transform.rotation.z) / -0.7f * downPow;
+
+		if (transform.localEulerAngles.z >= 250 && transform.localEulerAngles.z <= 290) 
+		{
+			r.velocity = new Vector3 (moveSpeed, downSpeed, 0);
+		}
+
+		if (Mathf.Abs(downSpeed) <= downPow) 
+		{
+			if (!isPlayerUp) 
+			{
+				isPlayerUp = true;
+				if (Mathf.Abs(maxSpeed) >= 6.0f)
+				{
+					Debug.Log ("up");
+					upSpeed = Mathf.Abs (maxSpeed);
+					StartCoroutine (UpMove ());
+					maxSpeed = 0;
+				}
+			}
+		}
+
+		else 
+		{
+			isPlayerUp = false;
+			// 機体の速度を設定する
+			LateSpeed(downSpeed);
+			if (maxSpeed > downSpeed) 
+			{
+				maxSpeed = downSpeed;
+			}
+		}
+	}
+
+	IEnumerator UpMove()
+	{
+		yield return new WaitForSeconds (downSpeed);
+		while (upSpeed >= downSpeed) 
+		{
+			LateSpeed (upSpeed);
+			upSpeed += downSpeed * 0.1f;
+			yield return null;
+		}
+	}
+
+	void LateSpeed(float value_y )
+	{
+		r.velocity = new Vector3 (moveSpeed * 0.6f, value_y, 0);
+	}
+
 }
