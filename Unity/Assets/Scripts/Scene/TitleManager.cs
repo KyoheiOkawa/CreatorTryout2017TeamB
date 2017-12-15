@@ -45,7 +45,7 @@ public class TitleManager : MonoBehaviour
 
     private void SceneNext()
     {
-		    FadeManager.Instance.Transition (3.0f, "Main");
+		    FadeManager.Instance.Transition (3.0f, "HowToPlay");
         isFade = true;
     }
 
