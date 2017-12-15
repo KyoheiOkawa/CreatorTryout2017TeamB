@@ -92,8 +92,8 @@ public class EnemyBalloon : MonoBehaviour
             if (WaitTime < 0)
             {
                 waitFlag = true;
-                minDrawX = PlayerController.Instance.transform.position.x + 6;
-                maxDrawX = PlayerController.Instance.transform.position.x + 7;
+                minDrawX = PlayerController.Instance.transform.position.x + 9;
+                maxDrawX = PlayerController.Instance.transform.position.x + 10;
             }
         }
     }
